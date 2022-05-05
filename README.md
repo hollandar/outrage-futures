@@ -68,7 +68,7 @@ If your future fails, it will automatically retry itself every 20 seconds, until
 services.AddFutures(100); // Retry up to 100 times.
 ```
 
-To avoid retries you can either pass 0 to the AddFutures method (the default is 10) or your service can wrap any exception it generated in a NoRetryException that throw that.
+To avoid retries you can either pass 0 to the AddFutures method (the default is 10) or your service can wrap any exception it generated in a NoRetryException and throw that instead.
 
 # More persistent persistance
 
@@ -91,4 +91,4 @@ var futuresService = serviceProvider.GetRequiredService<IFuturesService>();
 await FuturesService<Myself>("MyMethodAsync", new object[] { runCycle + 1}, scheduledTime: DateTimeOffset.UtcNow.AddMinutes(10));
 ```
 
-If you need a future to continue periodically, dont just add thousands of futures to the queue.  Even tho the tests do it, you shouldnt, just have the future reschedule itself.
+It is tempting to just inject thousands of futures with different scheduled times.  Resist the urge.
