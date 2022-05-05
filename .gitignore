@@ -1,0 +1,5 @@
+.nuke/temp/
+bin/
+obj/
+.vs/
+output/
