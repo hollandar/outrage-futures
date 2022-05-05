@@ -23,7 +23,7 @@ The simplest asynchronous future service:
 ```c#
 namespace SomeNamespace;
 
-public class AsyncService {
+public class AsyncTaskService {
 	public Task ExecuteAsync() {
 		Console.WriteLine("Task was completed.");
 		return Task.CompletedTask;
@@ -37,7 +37,7 @@ To call the future once it is registered, get an instance of IFuturesService and
 
 ```c#
 var futuresService = serviceProvider.GetRequiredService<IFuturesService>();
-await futuresService.AddFuture<AsyncTask>("ExecuteAsync");
+await futuresService.AddFuture<AsyncTaskService>("ExecuteAsync");
 ```
 
 Although we are awaiting AddFuture, it will return immediately and the task performed later, and in the background.
@@ -48,7 +48,7 @@ Imagine the ExecuteAsync method received an int, as in `public Task ExecuteAsync
 
 ```c#
 var futuresService = serviceProvider.GetRequiredService<IFuturesService>();
-await futuresService.AddFuture<AsyncTask>("ExecuteAsync", new object[] { someValue });
+await futuresService.AddFuture<AsyncTaskService>("ExecuteAsync", new object[] { someValue });
 ```
 
 # Delay it until later
@@ -57,7 +57,7 @@ You can also ask the futures processor to delay execution until some later time.
 
 ```c#
 var futuresService = serviceProvider.GetRequiredService<IFuturesService>();
-await futuresService.AddFuture<AsyncTask>("ExecuteAsync", scheduledTime: DateTimeOffset.UtcNow.AddMinutes(10));
+await futuresService.AddFuture<AsyncTaskService>("ExecuteAsync", scheduledTime: DateTimeOffset.UtcNow.AddMinutes(10));
 ```
 
 # Failed, retry
