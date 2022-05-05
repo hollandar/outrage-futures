@@ -72,7 +72,7 @@ To avoid retries you can either pass 0 to the AddFutures method (the default is 
 
 # More persistent persistance
 
-The default persistence mechanism in thread safe but in memory only, and it does not retain the contents of the ITaskResult objects that the methods return.
+The default persistence mechanism is thread safe but in memory only, and it does not retain the contents of the ITaskResult objects that the methods return.
 An alternate persistence layer can me implemented and registered using the IFuturesStorage version of AddFutures.
 This would allow you to:
 * Retain persistent futures between restarts
